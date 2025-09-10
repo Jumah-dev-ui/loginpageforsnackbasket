@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - SnackBasket</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="images/logo.png" alt="SnackBasket Logo" width="50">
+      <span>SnackBasket</span>
+    </div>
+    <div class="cart">
+      <i class="fas fa-shopping-basket"></i>
+      <div id="cart-count">0</div>
+    </div>
+  </nav>
+
+  <main class="page-content">
+    <h1>Login</h1>
+    <form class="login-form" onsubmit="submitLogin(event)">
+  <label for="email">Email</label>
+  <input type="email" id="email" required>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" required>
+
+  <button type="submit">Login</button>
+</form>
+
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbznQbYfW7M0BPK1fJ6TZ6Rq6E_QsRzO4iLrQcIy3eayDCnPL1huwcjLx2ASae70dDLzTg/exec"; // replace with your deployed Apps Script URL
+
+  async function submitLogin(e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/json" }
+    });
+
+    const result = await response.json();
+    console.log(result);
+    alert("Login submitted successfully!");
+  }
+</script>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 SnackBasket</p>
+  </footer>
+
+  <script src="cart.js"></script>
+</body>
+</html>
